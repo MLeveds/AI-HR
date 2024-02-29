@@ -1,4 +1,4 @@
-import pdftotext
+from pdfminer.high_level import extract_text as pdftotext
 from gigachat import GigaChat
 import re
 import logging
@@ -24,7 +24,7 @@ class ResumeParser():
         :return: PDF content string.
         """
         with open(pdf_path, "rb") as f:
-            pdf = pdftotext.PDF(f)
+            pdf = pdftotext(f)
         pdf_str = "\n\n".join(pdf)
         pdf_str = re.sub('\s[,.]', ',', pdf_str)
         pdf_str = re.sub('[\n]+', '\n', pdf_str)
