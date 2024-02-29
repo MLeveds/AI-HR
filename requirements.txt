@@ -1,0 +1,14 @@
+cffi==1.16.0
+charset-normalizer==3.3.2
+cryptography==42.0.5
+packaging==23.2
+pdf2image==1.17.0
+pdfminer==20191125
+pdfminer.six==20221105
+pdfplumber==0.10.4
+pillow==10.2.0
+pycparser==2.21
+pycryptodome==3.20.0
+PyPDF2==3.0.1
+pypdfium2==4.27.0
+pytesseract==0.3.10
