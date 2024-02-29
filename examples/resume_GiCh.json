@@ -1,0 +1,61 @@
+{
+  "resume": {
+    "about": "I am a highly motivated and enthusiastic individual with a strong background in computer science and mathematics. I have a proven track record of delivering high-quality work in a fast-paced environment. I am passionate about solving complex problems and creating innovative solutions that improve the lives of others.",
+    "birth_date": "1999-07-06",
+    "birth_date_year_only": "1999",
+    "city": "Madison",
+    "contactItems": [
+      {
+        "comment": "",
+        "contact_type": "1",
+        "resume_contact_item_id": "",
+        "value": "6086987552"
+      }
+    ],
+    "country": "United States",
+    "educationItems": [
+      {
+        "education_level": "4: Bachelor",
+        "education_type": "1: Undergraduate",
+        "faculty": "Computer Science",
+        "organization": "University of Wisconsin-Madison",
+        "result": "",
+        "resume_education_item_id": "",
+        "specialty": "Mathematics, Statistics",
+        "year": ""
+      }
+    ],
+    "experienceItems": [
+      {
+        "city": "Madison",
+        "description": "Built the user role in the internal graphics workload management tool by implementing SSO authentication, user authorization, and microservice authentication using the Merchant Active Directory and Azure Active Directory. Automated the prevention, detection, resolution, and reporting of CI incidents by implementing a three-layer Jenkins health matrix, Prometheus and Grafana, and a CI firefighter as a Jenkins daemon. University of Wisconsin-Madison, Computer Science Department Undergraduate Teaching Assistant for Computer Graphics January 2022 - May 2022 Hosted Computer Graphics office hours for 7 hours each week for questions about graphics concepts (e.g., transformations, curves, meshes, shaders, ray tracing, etc.) and API's (e.g., Canvas, SVG, glMatrix, GLSL, WebGL, Three.js, js, etc.) Maintained and routinely updated the course website using the Hugo framework and GitHub Actions' CI/CD workflow, Teradata Corporation Data Engineer Intern June 2021 - August 2021 Responsible for credit card fraud prevention and detection for a world-top commercial bank. Extracted and processed credit card data from the data warehouse using Teradata SQL and DS SQL and improved ETL routines using Perl and Bash scripts. Led the communication, demand analysis, and SQL development for a complex data extraction task requiring joining more than 20 tables across 2 data bases. Wrote peer-reviewed SQL and communicated with the operation team to ship the data in time.",
+        "employer": "Intel Corporation",
+        "ends": "",
+        "order": "1",
+        "position": "Software Development Engineer Intern",
+        "resume_experience_item_id": "",
+        "starts": "",
+        "url": ""
+      }
+    ],
+    "first_name": "Huan",
+    "gender": "Male",
+    "key_skills": "Programming Languages: Java Script, Python 3, C/C++, Java, Bash, Batch, React, Redux, Flask, Node, js, REST, PostgreSQL, MongoDB DB Development Tools: Linux, Git, Bash, Tmux, VIM, Jenkins, Docker Work Experience",
+    "language": "English",
+    "languageItems": [
+      {
+        "language": "Programming Languages",
+        "language_level": "5: Advanced",
+        "resume_language_item_id": ""
+      }
+    ],
+    "last_name": "Xu",
+    "middle_name": "Madison",
+    "photo_path": "",
+    "resume_id": "",
+    "resume_name": "Full-time SD Position",
+    "salary_expectations_amount": "Full-time SD Position",
+    "salary_expectations_currency": "USD",
+    "source_link": ""
+  }
+}
