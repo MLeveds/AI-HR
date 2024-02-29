@@ -1,23 +1,22 @@
 import pdftotext
-from openai import OpenAI
-
-client = OpenAI(api_key='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')
+from gigachat import GigaChat
 import re
 import logging
 import json
 from tokenizer import num_tokens_from_string
 
 class ResumeParser():
-    def __init__(self, OPENAI_API_KEY):
+    def __init__(self, API_KEY):
         # set GPT-3 API key from the environment vairable
         # GPT-3 completion questions
+
         self.prompt_questions = \
 """Summarize the text below into a JSON with exactly the following structure {basic_info: {first_name, last_name, full_name, email, phone_number, location, portfolio_website_url, linkedin_url, github_main_page_url, university, education_level (BS, MS, or PhD), graduation_year, graduation_month, majors, GPA}, work_experience: [{job_title, company, location, duration, job_summary}], project_experience:[{project_name, project_description}]}
 """
        # set up this parser's logger
         logging.basicConfig(filename='logs/parser.log', level=logging.DEBUG)
         self.logger = logging.getLogger()
-
+        self.api_key = API_KEY
     def pdf2string(self: object, pdf_path: str) -> str:
         """
         Extract the content of a pdf file to string.
@@ -35,7 +34,7 @@ class ResumeParser():
 
     def query_completion(self: object,
                         prompt: str,
-                        model: str = "gpt-3.5-turbo",
+                        model: str = 'GigaChat:latest',
                         temperature: float = 0.0,
                         max_tokens: int = 100,
                         top_p: int = 1,
@@ -55,17 +54,12 @@ class ResumeParser():
         """
         self.logger.info(f'query_completion: using {model}')
 
-        estimated_prompt_tokens = num_tokens_from_string(prompt, model)
-        estimated_answer_tokens = (max_tokens - estimated_prompt_tokens)
-        self.logger.info(f'Tokens: {estimated_prompt_tokens} + {estimated_answer_tokens} = {max_tokens}')
+        #estimated_prompt_tokens = num_tokens_from_string(prompt, model)
+        #estimated_answer_tokens = (max_tokens - estimated_prompt_tokens)
+        #self.logger.info(f'Tokens: {estimated_prompt_tokens} + {estimated_answer_tokens} = {max_tokens}')
 
-        response = client.completions.create(model=model,
-        prompt=prompt,
-        temperature=temperature,
-        max_tokens=estimated_answer_tokens,
-        top_p=top_p,
-        frequency_penalty=frequency_penalty,
-        presence_penalty=presence_penalty)
+        client = GigaChat(api_key=self.api_key, verify_ssl_certs=False, model=model)
+        response = client.chat(prompt)
         return response
     
     def query_resume(self: object, pdf_path: str) -> dict:
@@ -79,12 +73,11 @@ class ResumeParser():
         print(pdf_str)
         prompt = self.prompt_questions + '\n' + pdf_str
 
-        # Reference: https://platform.openai.com/docs/models/gpt-3-5
-        model = "gpt-3.5-turbo"
+        model = 'GigaChat:latest'
         max_tokens = 4097
 
-        response = self.query_completion(prompt=prompt,model=model,max_tokens=max_tokens)
-        response_text = response.choices[0].text.strip()
+        response = self.query_completion(prompt,model=model,max_tokens=max_tokens)
+        response_text = response.choices[0].message.content.strip()
         print(response_text)
         resume = json.loads(response_text)
         return resume
