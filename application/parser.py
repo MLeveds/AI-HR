@@ -11,7 +11,7 @@ class ResumeParser():
         # GPT-3 completion questions
 
         self.prompt_questions = \
-'''Ты бот, от которого требуется только принимать информацию о кандидате на вход и без каких-либо пояснений выдававать JSON в данном формате: 
+'''От тебя требуется только принимать информацию о кандидате на вход и без каких-либо пояснений выдававать JSON в данном формате: 
 {
   "resume": {
     "resume_id": "",
@@ -36,7 +36,7 @@ class ResumeParser():
         "resume_contact_item_id": "",
         "value": "сам контакт",
         "comment": "комментарий к контакту",
-        "contact_type": "Типы контактов - contact_type: 1: Телефон, 2: Email, 3: Skype, 4: Telegram, 5: Github; укажи только цифру"
+        "contact_type": "Типы контактов - contact_type: 1: Телефон, 2: Email, 3: Skype, 4: Telegram, 5: Github; укажи только цифру типа, не пиши сам тип"
       }
     ],
     "educationItems": [
@@ -47,8 +47,8 @@ class ResumeParser():
         "faculty": "факультет",
         "specialty": "специализация",
         "result": "результат образования (красный/синий диплом)",
-        "education_type": "Виды образования - education_type: 1: Начальное, 2: Повышение квалификации, 3: Сертификаты, 4: Основное; Укажи только цифру",
-        "education_level": "Уровень образования - education_level: 1: Среднее, 2: Среднее специальное, 3: Неоконченное высшее, 4: Высшее, 5: Бакалавр, 6: Магистр, 7: Кандидат наук, 8: Доктор наук; укажи только цифру"
+        "education_type": "Виды образования - education_type: 1: Начальное, 2: Повышение квалификации, 3: Сертификаты, 4: Основное; укажи только цифру типа, не пиши сам тип",
+        "education_level": "Уровень образования - education_level: 1: Среднее, 2: Среднее специальное, 3: Неоконченное высшее, 4: Высшее, 5: Бакалавр, 6: Магистр, 7: Кандидат наук, 8: Доктор наук; укажи только цифру типа, не пиши сам тип"
       }
     ],
     "experienceItems": [
@@ -68,12 +68,12 @@ class ResumeParser():
       {
         "resume_language_item_id": "",
         "language": "язык",
-        "language_level": "уровень владения language_level: 1: Начальный, 2: Элементарный, 3: Средний, 4: Средне-продвинутый, 5: Продвинутый, 6: В совершенстве, 7: Родной; укажи только цифру"
+        "language_level": "уровень владения language_level: 1: Начальный, 2: Элементарный, 3: Средний, 4: Средне-продвинутый, 5: Продвинутый, 6: В совершенстве, 7: Родной; укажи только цифру типа, не пиши сам тип"
       }
     ]
   }
 }
-Заполни JSON согласно информации в резюме, если в резюме нет информации согласно полю, оставь пропуск или вставь логичный ответ (например, если город образования - Москва, значит страну точно можно указать Россия)
+Заполни JSON согласно информации в резюме, если в резюме нет информации согласно полю, оставь пропуск или вставь логичный ответ (например, если город образования - Москва, значит страну точно можно указать Россия). Значения полей приведены только для информации о полях, не оставляй её в итоговом JSON
 '''
         logging.basicConfig(filename='logs/parser.log', level=logging.DEBUG)
         self.logger = logging.getLogger()
@@ -95,7 +95,7 @@ class ResumeParser():
 
     def query_completion(self: object,
                         prompt: str,
-                        model: str = 'GigaChat-Pro',
+                        model: str = 'GigaChat',
                         temperature: float = 0.0,
                         max_tokens: int = 2000,
                         top_p: int = 1,
@@ -131,7 +131,6 @@ class ResumeParser():
     def query_resume(self: object, pdf_path: str) -> dict:
         """
         Query GPT-3 for the work experience and / or basic information from the resume at the PDF file path.
-        :param pdf_path: Path to the PDF file.
         :return dictionary of resume with keys (basic_info, work_experience).
         """
         resume = {}
@@ -139,7 +138,7 @@ class ResumeParser():
         print(pdf_str)
         prompt = self.prompt_questions + '\n' + pdf_str
 
-        model = 'GigaChat-Pro'
+        model = 'GigaChat'
         max_tokens = 4097
 
         response = self.query_completion(prompt,model=model,max_tokens=max_tokens)
