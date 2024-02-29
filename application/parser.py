@@ -58,7 +58,11 @@ class ResumeParser():
         #estimated_answer_tokens = (max_tokens - estimated_prompt_tokens)
         #self.logger.info(f'Tokens: {estimated_prompt_tokens} + {estimated_answer_tokens} = {max_tokens}')
 
-        client = GigaChat(api_key=self.api_key, verify_ssl_certs=False, model=model)
+        print(self.api_key)
+        client = GigaChat(credentials='NDRlZWI4NjktY2NkYS00MDliLWExYTItZmVmZmVjN2QyM2ZjOjZlNjFiMDg5LTc3YTQtNDdkMS04NjMxLWFlNzVhNDVmNmNjMA==',
+                          verify_ssl_certs=False, model=model)
+        
+        
         response = client.chat(prompt)
         return response
     

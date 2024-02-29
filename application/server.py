@@ -17,7 +17,7 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 app.add_url_rule("/resume/<name>", endpoint="resume", build_only=True)
 app.secret_key = secrets.token_urlsafe(32)
 
-parser = ResumeParser(os.getenv('OPENAI_API_KEY', env_variables.get('OPENAI_API_KEY')))
+parser = ResumeParser(os.getenv('API_KEY', env_variables.get('API_KEY')))
 
 def allowed_file(filename):
     return '.' in filename and \
